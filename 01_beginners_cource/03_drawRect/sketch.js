@@ -7,6 +7,7 @@ let vy = [];
 let c = [];
 let thre = 50;
 
+
 function setup() {
     createCanvas(400, 400);
     for (let i = 0; i < n; i++) {
@@ -33,6 +34,7 @@ function draw() {
         connect(i);
     }
 }
+
 
 function pingpong(i) {
     if (x[i] >= width - d[i] / 2 || x[i] <= d[i] / 2)
