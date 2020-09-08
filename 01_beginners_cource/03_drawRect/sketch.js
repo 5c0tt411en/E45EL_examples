@@ -1,60 +1,46 @@
-let n = 200;
-let x = [];
-let y = [];
-let d = [];
-let vx = [];
-let vy = [];
-let c = [];
-let thre = 50;
+let img;
+let rateX;
+let rateY;
+let count = 7;
 
+function preload() {
+    img = loadImage('data/face-1568256.jpg');
+}
 
 function setup() {
-    createCanvas(400, 400);
-    for (let i = 0; i < n; i++) {
-        d[i] = int(random(1, 3));
-        x[i] = int(random(d[i] / 2, width - d[i] / 2));
-        y[i] = int(random(d[i] / 2, height - d[i] / 2));
-        for (;;) { 
-            vx[i] = int(random(-3, 3));
-            if (vx[i] != 0) break;
-        }
-        for (;;) { 
-            vy[i] = int(random(-3, 3));
-            if (vy[i] != 0) break;
-        }
-        c[i] = color(random(100, 140), random(150, 220), random(150, 250));
-        console.log('test') 
-    }
+	createCanvas(400, 400);
 }
- 
+
 function draw() {
-    background(0);
-    for (let i = 0; i < n; i++) {
-        pingpong(i);
-        connect(i);
-    }
+	background(0);
+	
+	rateX = img.width / width;
+	rateY = img.height / height;
+
+	squareRecusion(10, 10, width * rateX - 20, count);
+	noLoop();
 }
 
+function squareRecusion(x, y, size, n) {
+	fill(0);
+	stroke(255);
+    square(x / rateX, y / rateY, size / rateX);
+	noStroke();
+	fill(255);
+	let colorSize = (size / rateX) * (red(img.get(x, y)) / 255);
+	ellipse(x / rateX + size / (rateX * 2), y / rateY + size / (rateX * 2), colorSize, colorSize);
+    n--;
+    if (n >= 0) {
+        let hs = size/2;
 
-function pingpong(i) {
-    if (x[i] >= width - d[i] / 2 || x[i] <= d[i] / 2)
-        vx[i] = -vx[i];
-    if (y[i] >= height - d[i] / 2 || y[i] <= d[i] / 2)
-        vy[i] = -vy[i];
-    x[i] += vx[i];
-    y[i] +=vy[i];
-    
-    fill(c[i]);
-    stroke(255);
-    ellipse(x[i], y[i], d[i], d[i]);
-}
+        //Probability
+        let p = map(n, 0, count-1, 0.5, 0);
 
-function connect(i) {
-    stroke(c[i]);
-    for (let j = 0; j < n; j++) {
-        if (i != j && i < j) {
-            if (dist(x[i], y[i], x[j], y[j]) <= thre)
-                line(x[i], y[i], x[j], y[j]);
+        if (random(1) > p) {
+            squareRecusion(x, y, hs, n);
+            squareRecusion(x+hs, y, hs, n);
+            squareRecusion(x+hs, y+hs, hs, n);
+            squareRecusion(x, y+hs, hs, n);
         }
     }
 }
