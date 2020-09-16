@@ -1,58 +1,50 @@
-let n = 200;
-let x = [];
-let y = [];
-let d = [];
-let vx = [];
-let vy = [];
-let c = [];
-let thre = 50;
+let n = 50;
 
 function setup() {
     createCanvas(400, 400);
-    for (let i = 0; i < n; i++) {
-        d[i] = int(random(1, 3));
-        x[i] = int(random(d[i] / 2, width - d[i] / 2));
-        y[i] = int(random(d[i] / 2, height - d[i] / 2));
-        for (;;) { 
-            vx[i] = int(random(-3, 3));
-            if (vx[i] != 0) break;
-        }
-        for (;;) { 
-            vy[i] = int(random(-3, 3));
-            if (vy[i] != 0) break;
-        }
-        c[i] = color(random(100, 140), random(150, 220), random(150, 250));
-        console.log('test') 
-    }
 }
  
 function draw() {
-    background(0);
-    for (let i = 0; i < n; i++) {
-        pingpong(i);
-        connect(i);
-    }
+    background(255);
+    lines(0, height / 2, 1);
+    lines(0, height / 2, 2);
+    lines(width / 2, 0, 3);
+    lines(width / 2, height, 4);
+    lines(width / 2, height, 1);
+    lines(width / 2, 0, 2);
+    lines(width, height / 2, 3);
+    lines(width, height / 2, 4);
 }
 
-function pingpong(i) {
-    if (x[i] >= width - d[i] / 2 || x[i] <= d[i] / 2)
-        vx[i] = -vx[i];
-    if (y[i] >= height - d[i] / 2 || y[i] <= d[i] / 2)
-        vy[i] = -vy[i];
-    x[i] += vx[i];
-    y[i] +=vy[i];
-    
-    fill(c[i]);
-    stroke(255);
-    ellipse(x[i], y[i], d[i], d[i]);
-}
-
-function connect(i) {
-    stroke(c[i]);
-    for (let j = 0; j < n; j++) {
-        if (i != j && i < j) {
-            if (dist(x[i], y[i], x[j], y[j]) <= thre)
-                line(x[i], y[i], x[j], y[j]);
+function lines(x, y, direction) { 
+    let toX;
+    let toY; 
+    if (direction == 1) {
+        toX = x + width / 2;
+        toY = y - height / 2;
+        for (let i = 0; i <= n; i++) { 
+            line(x, y, toX, toY + (i / n) * height / 2);
         }
-    }
+     }
+    else if (direction == 2) {
+        toX = x + width / 2;
+        toY = y + height / 2;
+        for (let i = 0; i <= n; i++) { 
+            line(x, y, toX - (i / n) * width / 2, toY);
+        }
+     }
+    else if (direction == 3) {
+        toX = x - width / 2;
+        toY = y + height / 2;
+        for (let i = 0; i <= n; i++) { 
+            line(x, y, toX, toY - (i / n) * height / 2);
+        }
+     }
+    else if (direction == 4) {
+        toX = x - width / 2;
+        toY = y - height / 2;
+        for (let i = 0; i <= n; i++) { 
+            line(x, y, toX + (i / n) * width / 2, toY);
+        }
+     }
 }
