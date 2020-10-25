@@ -1,15 +1,13 @@
 function setup() {
     createCanvas(400, 400);
-    blendMode(ADD);
     colorMode(HSB);
+    noStroke();
 }
  
 function draw() {
-    background(0);
-
+    background(255);
     for (let j = 0; j < 15; j++) {
-        // stroke(255);
-        fill(random(50, 360), 100, 100, 0.4);
+        fill(random(50, 360), 100, 100, 0.33);
         beginShape();
         for (let i = 2; i <= 10; i+=2) {
             vertex(width / 2 + (random() < 0.5 ? width / i : - width / i),

@@ -5,32 +5,32 @@ let d = [];
 let vx = [];
 let vy = [];
 let c = [];
-let thre = 50;
+let thre = 30;
+let col = ['#FF9984', '#FF872F', '#85E9BE', '#28A9FF', '#FFFFFF'];
 
 function setup() {
     createCanvas(400, 400);
     for (let i = 0; i < n; i++) {
-        d[i] = int(random(1, 3));
+        d[i] = int(random(3, 20));
         x[i] = int(random(d[i] / 2, width - d[i] / 2));
         y[i] = int(random(d[i] / 2, height - d[i] / 2));
         for (;;) { 
-            vx[i] = int(random(-3, 3));
+            vx[i] = random(-1, 1);
             if (vx[i] != 0) break;
         }
         for (;;) { 
-            vy[i] = int(random(-3, 3));
+            vy[i] = random(-1, 1);
             if (vy[i] != 0) break;
         }
-        c[i] = color(random(100, 140), random(150, 220), random(150, 250));
-        console.log('test') 
+        c[i] = col[int(random(4))];
     }
 }
  
 function draw() {
-    background(0);
+    background(col[4]);
     for (let i = 0; i < n; i++) {
-        pingpong(i);
         connect(i);
+        pingpong(i);
     }
 }
 
@@ -43,7 +43,6 @@ function pingpong(i) {
     y[i] +=vy[i];
     
     fill(c[i]);
-    stroke(255);
     ellipse(x[i], y[i], d[i], d[i]);
 }
 
@@ -51,8 +50,10 @@ function connect(i) {
     stroke(c[i]);
     for (let j = 0; j < n; j++) {
         if (i != j && i < j) {
-            if (dist(x[i], y[i], x[j], y[j]) <= thre)
+            if (dist(x[i], y[i], x[j], y[j]) <= thre) {
+                strokeWeight(2);
                 line(x[i], y[i], x[j], y[j]);
+            }
         }
     }
 }

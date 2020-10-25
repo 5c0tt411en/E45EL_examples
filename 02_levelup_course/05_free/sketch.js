@@ -1,5 +1,5 @@
-let n = 100;
-let col = ['#2d3339', '#412824', '#512c18', '#b52c25', '#e9e9cf'];
+let n = 30;
+let col = ['#E91B86', '#FFCC7C', '#A0CF31', '#92C8E8', '#FFFFFF'];
 
 function setup() {
     createCanvas(400, 400);
@@ -10,7 +10,7 @@ function setup() {
 function draw() {
     background(col[4]);
     for (let i = 1; i <= n; i++) { 
-        strokeWeight(random(5));
+        strokeWeight(random(10, 15));
         stroke(col[int(random(4))]);
         arc(width / 2, height / 2, width * i / n, height * i / n, random(TWO_PI), random(TWO_PI) );
     }

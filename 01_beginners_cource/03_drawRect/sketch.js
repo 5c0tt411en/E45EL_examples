@@ -1,7 +1,8 @@
 let img;
 let rateX;
 let rateY;
-let count = 7;
+let count = 5;
+let col = ['#C8D921', '#FFFFFF', '#F9F7F2']
 
 function preload() {
     img = loadImage('data/face-1568256.jpg');
@@ -9,11 +10,10 @@ function preload() {
 
 function setup() {
 	createCanvas(400, 400);
+	background(255);
 }
 
 function draw() {
-	background(0);
-	
 	rateX = img.width / width;
 	rateY = img.height / height;
 
@@ -22,19 +22,18 @@ function draw() {
 }
 
 function squareRecusion(x, y, size, n) {
-	fill(0);
-	stroke(255);
-    square(x / rateX, y / rateY, size / rateX);
+	fill(col[0]);
+	stroke(col[2]);
+    rect(x / rateX, y / rateY, size / rateX, size / rateX);
 	noStroke();
-	fill(255);
-	let colorSize = (size / rateX) * (red(img.get(x, y)) / 255);
-	ellipse(x / rateX + size / (rateX * 2), y / rateY + size / (rateX * 2), colorSize, colorSize);
+	fill(col[1]);
+    let colorSize = (size / rateX) * (red(img.get(x, y)) / 255);
+    rect(x / rateX + (size / rateX - colorSize) / 2, y / rateY + (size / rateX - colorSize) / 2, colorSize, colorSize);
     n--;
     if (n >= 0) {
-        let hs = size/2;
+        let hs = size / 2;
 
-        //Probability
-        let p = map(n, 0, count-1, 0.5, 0);
+        let p = map(n, 0, count - 1, 0.15, 0);
 
         if (random(1) > p) {
             squareRecusion(x, y, hs, n);

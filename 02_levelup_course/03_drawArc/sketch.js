@@ -2,13 +2,12 @@ let numTiles = 5;
 let sizeTile;
 
 let tiles = [];
+let col = ['#E9EAFF', '#70B5B6'];
 
 
 function setup() {
 	createCanvas(400, 400);
-	background(0);
 	sizeTile = width / numTiles;
-	colorMode(HSB, 255)
 	noFill();
 	strokeWeight(30);
 	for (let i = 0; i < numTiles; i++) {
@@ -22,7 +21,7 @@ function setup() {
 }
 
 function draw() {
-	background(0);
+	background(col[0]);
 	for (let i = 0; i < numTiles * numTiles; i++) {
 		tiles[i].display();
 	}
@@ -39,8 +38,7 @@ function Tile() {
 	this.display = function() {
 		push();
 		translate(this.x, this.y);
-		stroke(255);
-		// stroke(300 * noise(this.col[0], this.col[1]), 255, 255);
+		stroke(col[1]);
 		if (this.orientation > 0.5) {
 			arc(-this.r / 2, -this.r / 2, this.r, this.r, 0, PI / 2);
 			arc(this.r / 2, this.r / 2, this.r, this.r, -PI, -PI / 2);
@@ -48,6 +46,6 @@ function Tile() {
 			arc(-this.r / 2, this.r / 2, this.r, this.r, -PI / 2, 0);
 			arc(this.r / 2, -this.r / 2, this.r, this.r, PI / 2, PI);
 		}
-		pop();
+        pop();
 	}
 }

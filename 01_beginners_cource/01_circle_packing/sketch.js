@@ -2,7 +2,7 @@ let circles;
 let img;
 
 function preload() {
-    img = loadImage("data/processing.png");
+    img = loadImage("data/star.png");
 }
 
 function setup() {
@@ -14,7 +14,7 @@ function setup() {
 }
 
 function draw() {
-    background(0);
+    background(255);
 
     let total = 20;
     let count = 0;
@@ -69,7 +69,7 @@ function newCircle() {
     for (let i = 0; i < circles.length; i++) {
         let circle = circles[i];
         let d = dist(x, y, circle.x, circle.y);
-        if (d - 2 < circle.r - 0.1) {
+        if (d - 5 < circle.r - 0.1) {
         valid = false;
         break;
         }
@@ -89,7 +89,7 @@ function newCircle() {
 function Circle(x, y, color) {
     this.x = x;
     this.y = y;
-    this.r = 2;
+    this.r = 5;
     this.color = color;
     this.growing = true;
 

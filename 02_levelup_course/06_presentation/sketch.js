@@ -1,26 +1,32 @@
-let n = 50;
+let n = 15;
 let x, y;
 let mode = 0;
 let rate = 0;
+let col = ['#FFF1B8', '#76C6DE', '#C42AF0', '#F75C3D', '#FFFFFF']
+let c = []
 
 function setup() {
     createCanvas(400, 400);
-    stroke(80, 120, 220, 120);
+    stroke(234, 90, 71, 20);
+    for (let j = 0; j < n; j++) {
+        for (let i = 0; i < n; i++) {
+            c[i + j * n] = col[int(random(4))]
+        }
+    }
 }
  
 function draw() {
-    blendMode(BLEND);
-    background(0, 20);
-    blendMode(ADD);
+    background(col[4]);
     for (let j = 0; j < n; j++) {
         for (let i = 0; i < n; i++) { 
-            strokeWeight(5 * noise(0.5 * (i + j) / n));
-            let x1 = width / 2 + 20 * (5 + 2 * cos(i)) * cos(j);
-            let y1 = height / 2 + 20 * (5 + 2 * cos(i)) * sin(j);
-            let x2 = width / 2 + 20 * (5 + 2 * cos(i)) * sin(j);
-            let y2 = width / 4 + 20 * (sin(i) + 0.2 * j);
-            let x3 = width / 2 + 150 * cos(i) * cos(j);
-            let y3 = height / 2 + 150 * sin(i);
+            stroke(c[i + j * n]);
+            strokeWeight(50 * noise(10 * (i + j) / n));
+            let x1 = width / 2 + 25 * (5 + 2 * cos(i)) * cos(j);
+            let y1 = height / 2 + 25 * (5 + 2 * cos(i)) * sin(j);
+            let x2 = width / 2 + 30 * (5 + 2 * cos(i)) * sin(j);
+            let y2 = width / 3 + 60 * (sin(i) + 0.2 * j);
+            let x3 = width / 2 + 200 * cos(i) * cos(j);
+            let y3 = height / 2 + 200 * sin(i);
             if (mode == 0) {
                 x = lerp(x1, x2, rate);
                 y = lerp(y1, y2, rate);

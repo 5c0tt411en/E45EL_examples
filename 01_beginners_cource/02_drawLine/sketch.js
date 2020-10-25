@@ -1,11 +1,14 @@
-let n = 50;
+let n = 15;
+let col = ['#EA617C', '#FFFFFF']
 
 function setup() {
     createCanvas(400, 400);
 }
  
 function draw() {
-    background(255);
+    background(col[1]);
+    // strokeWeight(3);
+    stroke(col[0]);
     lines(0, height / 2, 1);
     lines(0, height / 2, 2);
     lines(width / 2, 0, 3);

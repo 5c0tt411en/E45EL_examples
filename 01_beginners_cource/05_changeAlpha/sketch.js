@@ -1,5 +1,6 @@
-let n = 5;
-let offset = 50;
+let n = 20;
+let alpha = 30;
+let move = 200;
 
 function setup() {
     createCanvas(400, 400);
@@ -8,18 +9,21 @@ function setup() {
 }
 
 function draw() {
+    let r = width / 2;
     background(0);
-    fill(50, 50, 255, 20);
-    circles(width / 2, width / 2, width / 2, width / 2, 7, -1, 0);
-    // circles(width / 2, width / 2, width / 2, width / 2, 7, 0, 1);
-    fill(255, 50, 50, 20);
-    // circles(width / 2, width / 2, width / 2, width / 2, 7, 1, 0);
-    circles(width / 2, width / 2, width / 2, width / 2, 7, 0, -1);
+    fill(5, 98, 135, alpha);
+    circles(width / 2 + move, width / 2, r, r, n, -1, 0);
+    fill(66, 185, 206, alpha);
+    circles(width / 2, width / 2 - move, r, r, n, 0, 1);
+    fill(250, 130, 106, alpha);
+    circles(width / 2 - move, width / 2, r, r, n, 1, 0);
+    fill(240, 88, 69, alpha);
+    circles(width / 2, width / 2 + move, r, r, n, 0, -1);
 	noLoop();
 }
 
 function circles(x, y, rX, rY, n, xR, yR) {
-    let rate = 0.1;
+    let rate = 0.15;
     let offset = (rX * abs(xR) + rY * abs(yR)) * rate;
     let nextR = (rX * abs(xR) + rY * abs(yR)) * (1 - rate);
 

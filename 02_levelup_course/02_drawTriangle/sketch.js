@@ -1,13 +1,12 @@
-let numTiles = 20;
+let numTiles = 8;
 let sizeTile;
 
 let tiles = [];
-
+let col = ['#53A5D4', '#F8F5D9'];
 
 function setup() {
     createCanvas(400, 400);
     noStroke();
-	background(0);
 	sizeTile = width / numTiles;
 	colorMode(HSB, 255)
 	for (let i = 0; i < numTiles; i++) {
@@ -21,7 +20,7 @@ function setup() {
 }
 
 function draw() {
-	background(0);
+	background(col[0]);
 	for (let i = 0; i < numTiles * numTiles; i++) {
 		tiles[i].display();
 	}
@@ -38,8 +37,7 @@ function Tile() {
 	this.display = function() {
 		push();
         translate(this.x, this.y);
-        fill(255);
-		// fill(300 * noise(this.col[0], this.col[1]), 255, 255);
+        fill(col[1]);
 		if (this.orientation > 0.75) {
 			triangle(-this.r / 2, -this.r / 2, this.r / 2, this.r / 2, this.r / 2, -this.r / 2);
 		} else if (this.orientation > 0.5 && this.orientation <= 0.75) {
